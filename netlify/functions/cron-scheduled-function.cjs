@@ -27,4 +27,4 @@ const handler = async () => {
   handleBets();
 };
 
-module.exports = handler;
+module.exports = { handler };
