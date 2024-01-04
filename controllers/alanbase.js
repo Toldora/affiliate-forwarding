@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const postGoals = async goals => {
   try {
-    console.log('alanbase post goals');
     await alanbaseApi.post(
       `/goals/${process.env.ALANBASE_API_PATH_KEY}`,
       goals,

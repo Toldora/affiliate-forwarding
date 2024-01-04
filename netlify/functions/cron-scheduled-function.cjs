@@ -21,10 +21,13 @@ const {
 // export const handler = serverless(app);
 
 const handler = async () => {
-  console.log('cron');
   handleRegistrations();
   handleEvents();
   handleBets();
+
+  return {
+    statusCode: 200,
+  };
 };
 
 module.exports = { handler };
