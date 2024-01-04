@@ -11,6 +11,12 @@ const fetchPlayers = async () => {
     'minute',
   );
 
+  console.log(
+    `date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
+      currentDate,
+    )}`,
+  );
+
   const { data } = await turboApi.get(
     `/players?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
       currentDate,
