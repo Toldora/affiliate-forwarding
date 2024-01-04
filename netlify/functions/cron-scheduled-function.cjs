@@ -1,4 +1,3 @@
-const { schedule } = require('@netlify/functions');
 require('../../index');
 
 const {
@@ -17,7 +16,4 @@ const handler = async () => {
   };
 };
 
-module.exports.handler = schedule(
-  `*/${process.env.FETCH_INTERVAL_MINUTES} * * * *`,
-  handler,
-);
+module.exports.handler = handler;
