@@ -20,7 +20,7 @@ import {
 // eslint-disable-next-line import/prefer-default-export
 // export const handler = serverless(app);
 
-export default () => {
+export default async () => {
   handleRegistrations();
   handleEvents();
   handleBets();
@@ -29,5 +29,5 @@ export default () => {
 // every 5 minutes
 // '*/5 * * * *'
 export const config = {
-  schedule: `*/${process.env.FETCH_INTERVAL_MINUTES} * * * *`,
+  schedule: `*/5 * * * *`,
 };
