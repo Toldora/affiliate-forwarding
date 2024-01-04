@@ -2,4 +2,4 @@
   external_node_modules = ["express"]
   node_bundler = "esbuild"
 [functions."cron-scheduled-function"]
-schedule = "* * * * */1"
+schedule = "* * * * 0"
