@@ -2,9 +2,9 @@ const { default: axios } = require('axios');
 require('dotenv').config();
 
 const turboApi = axios.create({
-  baseURL: process.env.TRAFFLOW_API_URL,
+  baseURL: process.env.TURBO_API_URL,
   headers: {
-    'x-trafflow-api-key': process.env.TRAFFLOW_API_KEY,
+    'x-alanbase-api-key': process.env.TURBO_API_KEY,
   },
 });
 

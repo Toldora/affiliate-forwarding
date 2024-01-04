@@ -1,3 +1,3 @@
 const dayjs = require('dayjs');
-const isSameOrAfter = require('dayjs/plugin/isSameOrAfter');
-dayjs.extend(isSameOrAfter);
+const utc = require('dayjs/plugin/utc');
+dayjs.extend(utc);

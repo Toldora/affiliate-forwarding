@@ -1,20 +1,18 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
 const logger = require('morgan');
 const cron = require('node-cron');
-const { handleRegistrations } = require('./controllers');
+const {
+  handleRegistrations,
+  handleEvents,
+  handleBets,
+} = require('./controllers');
 require('./plugins');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3030;
 
 app.use(logger('dev'));
-
-app.get('/', async (req, res) => {
-  await handleRegistrations();
-  res.end();
-});
 
 app.use((err, _, res, __) => {
   console.log(err.stack);
@@ -28,18 +26,18 @@ app.use((err, _, res, __) => {
 
 const init = async () => {
   try {
-    await mongoose.connect(process.env.DB_HOST, {
-      retryWrites: true,
-      w: 'majority',
-    });
     // every 5 minutes
     // '0 */5 * * * *'
-    // cron.schedule('*/10 * * * * *', () => {
-    //   fetchPlayers();
-    // });
+    // every 10 seconds
+    // '*/10 * * * * *'
+    cron.schedule(`0 */${process.env.FETCH_INTERVAL_MINUTES} * * * *`, () => {
+      handleRegistrations();
+      handleEvents();
+      handleBets();
+    });
 
     app.listen(PORT, () => {
-      console.log('Server has been started...');
+      console.log(`Server has been started on port: ${PORT}`);
     });
   } catch (e) {
     console.log(e);

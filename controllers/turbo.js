@@ -2,27 +2,68 @@ const dayjs = require('dayjs');
 const { turboApi } = require('../api');
 require('dotenv').config();
 
-const fetchPlayers = async () => {
-  const currentDate = dayjs();
-  // const fetchDateFormat = currentDate.format('YYYY-MM-DD');
+const toFetchFormat = date => date.format('YYYY-MM-DD H:mm');
 
-  // Включаем пользователей за последние два интервала
-  // плюс минута на погрешность
-  const includingDate = dayjs('2023-11-08 14').subtract(
-    process.env.FETCH_INTERVAL_MINUTES * 2 + 1,
+const fetchPlayers = async () => {
+  const currentDate = dayjs().utc();
+  const dateFrom = currentDate.subtract(
+    Number(process.env.FETCH_INTERVAL_MINUTES),
+    'minute',
+  );
+
+  console.log(
+    `/players?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
+      currentDate,
+    )}`,
+  );
+
+  const { data } = await turboApi.get(
+    `/players?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
+      currentDate,
+    )}`,
+  );
+  const players = data?.data ?? data;
+  return players;
+};
+
+const fetchEvents = async () => {
+  const currentDate = dayjs().utc();
+  const dateFrom = currentDate.subtract(
+    Number(process.env.FETCH_INTERVAL_MINUTES),
     'minute',
   );
 
   const { data } = await turboApi.get(
-    `/players?date_from=${'2023-11-14'}&date_to=${'2023-11-14'}`,
+    `/events?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
+      currentDate,
+    )}`,
   );
-  const players = data?.data ?? data;
-  const newPlayers = players.filter(player => {
-    return true;
-    const registration_date = dayjs(player.registration_date);
-    return registration_date.isSameOrAfter(includingDate);
-  });
-  return newPlayers;
+  const events = data?.data ?? data;
+  const normalizedEvents = events.map(event => ({
+    ...event,
+    user_id: event.custom1,
+  }));
+  return normalizedEvents;
 };
 
-module.exports = { fetchPlayers };
+const fetchBets = async () => {
+  const currentDate = dayjs().utc();
+  const dateFrom = currentDate.subtract(
+    Number(process.env.FETCH_INTERVAL_MINUTES),
+    'minute',
+  );
+
+  const { data } = await turboApi.get(
+    `/bets?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
+      currentDate,
+    )}`,
+  );
+  const bets = data?.data ?? data;
+  const normalizedBets = bets.map(bet => ({
+    ...bet,
+    user_id: bet.custom1,
+  }));
+  return normalizedBets;
+};
+
+module.exports = { fetchPlayers, fetchEvents, fetchBets };
