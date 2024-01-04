@@ -1,12 +1,7 @@
 const express = require('express');
 const app = express();
 const logger = require('morgan');
-// const cron = require('node-cron');
-// const {
-//   handleRegistrations,
-//   handleEvents,
-//   handleBets,
-// } = require('./controllers');
+
 require('./plugins');
 require('dotenv').config();
 

@@ -1,6 +1,13 @@
 const { alanbaseApi } = require('../api');
 require('dotenv').config();
 
+const buildErrorInfo = (errorData, initialData) => {
+  return Object.keys(errorData.errors).reduce((acc, key) => {
+    const index = key.split('.')[0];
+    return { ...acc, [index]: initialData[index] };
+  }, {});
+};
+
 const postGoals = async goals => {
   try {
     await alanbaseApi.post(
@@ -8,7 +15,11 @@ const postGoals = async goals => {
       goals,
     );
   } catch (error) {
-    console.log('error.data', error.response.data);
+    const data = error.response.data;
+    console.log('postGoals error', data);
+    const goalsWithErrors = buildErrorInfo(data, goals);
+    console.log('Goals with errors', goalsWithErrors);
+
     // throw error;
   }
 };
@@ -20,7 +31,11 @@ const postEvents = async events => {
       events,
     );
   } catch (error) {
-    console.log('error.data', error.response.data);
+    const data = error.response.data;
+    console.log('postEvents error', data);
+    const eventsWithErrors = buildErrorInfo(data, events);
+    console.log('Events with errors', eventsWithErrors);
+
     // throw error;
   }
 };

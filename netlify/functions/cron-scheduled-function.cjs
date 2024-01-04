@@ -1,4 +1,4 @@
-// const serverless = require('serverless-http');
+const { schedule } = require('@netlify/functions');
 require('../../index');
 
 const {
@@ -6,19 +6,6 @@ const {
   handleEvents,
   handleBets,
 } = require('../../controllers');
-
-// every 5 minutes
-// '0 */5 * * * *'
-// every 10 seconds
-// '*/10 * * * * *'
-// cron.schedule(`0 */${process.env.FETCH_INTERVAL_MINUTES} * * * *`, () => {
-//   handleRegistrations();
-//   handleEvents();
-//   handleBets();
-// });
-
-// eslint-disable-next-line import/prefer-default-export
-// export const handler = serverless(app);
 
 const handler = async () => {
   await handleRegistrations();
@@ -30,4 +17,7 @@ const handler = async () => {
   };
 };
 
-module.exports = { handler };
+module.exports.handler = schedule(
+  `*/${process.env.FETCH_INTERVAL_MINUTES} * * * *`,
+  handler,
+);
