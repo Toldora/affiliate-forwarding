@@ -1,5 +1,5 @@
 // const serverless = require('serverless-http');
-// const app = require('../../index');
+require('../../index');
 
 const {
   handleRegistrations,
@@ -27,4 +27,8 @@ const handler = async () => {
   handleBets();
 };
 
-module.exports = { handler };
+const config = {
+  schedule: '*/1 * * * *',
+};
+
+module.exports = { handler, config };
