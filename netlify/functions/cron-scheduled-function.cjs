@@ -27,8 +27,4 @@ const handler = async () => {
   handleBets();
 };
 
-const config = {
-  schedule: '*/1 * * * *',
-};
-
-module.exports = { handler, config };
+module.exports = { handler };
