@@ -1,11 +1,7 @@
 // const serverless = require('serverless-http');
 // const app = require('../../index');
 
-import {
-  handleBets,
-  handleEvents,
-  handleRegistrations,
-} from '../../controllers';
+import controller from '../../controllers';
 
 // every 5 minutes
 // '0 */5 * * * *'
@@ -20,14 +16,16 @@ import {
 // eslint-disable-next-line import/prefer-default-export
 // export const handler = serverless(app);
 
-export default async () => {
-  handleRegistrations();
-  handleEvents();
-  handleBets();
+export default async req => {
+  const { next_run } = await req.json();
+
+  console.log('Received event! Next invocation at:', next_run);
+
+  controller.handleRegistrations();
+  controller.handleEvents();
+  controller.handleBets();
 };
 
-// every 5 minutes
-// '*/5 * * * *'
 export const config = {
-  schedule: `*/5 * * * *`,
+  schedule: '*/1 * * * *',
 };
