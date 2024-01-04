@@ -21,9 +21,9 @@ const {
 // export const handler = serverless(app);
 
 const handler = async () => {
-  handleRegistrations();
-  handleEvents();
-  handleBets();
+  await handleRegistrations();
+  await handleEvents();
+  await handleBets();
 
   return {
     statusCode: 200,
