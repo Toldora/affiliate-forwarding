@@ -53,10 +53,14 @@ const fetchBets = async () => {
     )}`,
   );
   const bets = data?.data ?? data;
-  const normalizedBets = bets.map(bet => ({
-    ...bet,
-    user_id: bet.custom1,
-  }));
+  const normalizedBets = bets.map(bet =>
+    bet.user_id
+      ? bet
+      : {
+          ...bet,
+          user_id: bet.custom1,
+        },
+  );
   return normalizedBets;
 };
 
