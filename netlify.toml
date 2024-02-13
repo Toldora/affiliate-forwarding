@@ -3,3 +3,5 @@
   node_bundler = "esbuild"
 [functions."cron-scheduled-function"]
 schedule = "*/5 * * * *"
+[functions."bets-cron-scheduled-function"]
+schedule = "*/10 * * * *"

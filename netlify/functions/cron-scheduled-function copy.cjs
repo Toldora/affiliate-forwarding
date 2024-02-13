@@ -1,15 +1,10 @@
 require('../../index');
 
-const {
-  handleRegistrations,
-  handleEvents,
-  // handleBets,
-} = require('../../controllers');
+const { handleRegistrations, handleEvents } = require('../../controllers');
 
 const handler = async () => {
   await handleRegistrations();
   await handleEvents();
-  // await handleBets();
 
   return {
     statusCode: 200,
