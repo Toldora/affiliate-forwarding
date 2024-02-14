@@ -10,6 +10,7 @@ const buildErrorInfo = (errorData, initialData) => {
 
 const postGoals = async goals => {
   try {
+    console.log('postGoals', goals);
     await alanbaseApi.post(
       `/goals/${process.env.ALANBASE_API_PATH_KEY}`,
       goals,
@@ -26,6 +27,7 @@ const postGoals = async goals => {
 
 const postEvents = async events => {
   try {
+    console.log('postEvents', events);
     await alanbaseApi.post(
       `/events/${process.env.ALANBASE_API_PATH_KEY}`,
       events,
