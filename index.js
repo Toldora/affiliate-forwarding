@@ -29,6 +29,6 @@ const init = async () => {
   }
 };
 
-init();
+// init();
 
 module.exports = app;
