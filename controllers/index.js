@@ -55,9 +55,11 @@ const handleBets = async () => {
     const summedBets = sumGroupedEvents(betsGroupedByUserId);
     const summedWins = sumGroupedEvents(winsGroupedByUserId);
 
-    if (summedBets.length || summedWins.length) {
-      await alanbaseController.postEvents([...summedBets, ...summedWins]);
-    }
+    console.log([...summedBets, ...summedWins]);
+
+    // if (summedBets.length || summedWins.length) {
+    //   await alanbaseController.postEvents([...summedBets, ...summedWins]);
+    // }
   } catch (error) {
     console.log('handleBets', error);
   }

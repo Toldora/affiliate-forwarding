@@ -42,10 +42,17 @@ const fetchEvents = async () => {
 
 const fetchBets = async () => {
   const currentDate = dayjs().utc();
-  const dateFrom = currentDate.subtract(
-    Number(process.env.FETCH_INTERVAL_MINUTES),
-    'minute',
-  );
+  const dateFrom = currentDate
+    .subtract(
+      // Number(process.env.FETCH_INTERVAL_MINUTES),
+      6,
+      'hour',
+    )
+    .subtract(
+      // Number(process.env.FETCH_INTERVAL_MINUTES),
+      30,
+      'minute',
+    );
 
   const { data } = await turboApi.get(
     `/bets?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
