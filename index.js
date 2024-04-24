@@ -7,7 +7,7 @@ const init = async () => {
   try {
     cron.schedule('*/20 * * * * *', function () {
       console.log('invoke');
-      fetch('/netlify/functions/cron-background', {
+      fetch('/netlify/functions/cron', {
         method: 'POST',
       });
     });
