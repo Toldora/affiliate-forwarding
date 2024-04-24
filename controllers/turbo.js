@@ -10,11 +10,15 @@ const fetchPlayers = async () => {
     Number(process.env.FETCH_INTERVAL_MINUTES),
     'minute',
   );
+  console.log(process.env.FETCH_INTERVAL_MINUTES);
 
+  // const { data } = await turboApi.get(
+  //   `/players?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
+  //     currentDate,
+  //   )}`,
+  // );
   const { data } = await turboApi.get(
-    `/players?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
-      currentDate,
-    )}`,
+    `/players?date_from=2024-04-17 10:00&date_to=2024-04-17 13:00`,
   );
   const players = data?.data ?? data;
   return players;

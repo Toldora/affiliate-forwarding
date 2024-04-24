@@ -1,5 +1,3 @@
-require('../../index');
-
 const {
   handleRegistrations,
   handleEvents,
@@ -8,12 +6,8 @@ const {
 
 const handler = async () => {
   await handleRegistrations();
-  await handleEvents();
-  await handleBets();
-
-  return {
-    statusCode: 200,
-  };
+  // await handleEvents();
+  // await handleBets();
 };
 
 module.exports.handler = handler;

@@ -10,10 +10,11 @@ const handleRegistrations = async () => {
     // const createdPlayers = (await Promise.all(promises)).filter(player =>
     //   Boolean(player),
     // );
+    console.log(players);
 
-    if (players.length) {
-      await alanbaseController.postGoals(players);
-    }
+    // if (players.length) {
+    //   await alanbaseController.postGoals(players);
+    // }
   } catch (error) {
     console.log('handleRegistrations', error);
   }
