@@ -2,16 +2,16 @@ require('../../index');
 
 const handler = async () => {
   console.log('invoke');
-  try {
-    await fetch(
-      'https://mellow-basbousa-4a0130.netlify.app/.netlify/functions/cron',
-      {
-        method: 'POST',
-      },
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  // try {
+  fetch(
+    'https://mellow-basbousa-4a0130.netlify.app/.netlify/functions/cron-background',
+    {
+      method: 'POST',
+    },
+  );
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
   return {
     statusCode: 200,

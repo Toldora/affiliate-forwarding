@@ -11,9 +11,9 @@ const handler = async () => {
   // await handleEvents();
   // await handleBets();
 
-  return {
-    statusCode: 200,
-  };
+  // return {
+  //   statusCode: 200,
+  // };
 };
 
 module.exports.handler = handler;
