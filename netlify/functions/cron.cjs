@@ -1,3 +1,5 @@
+require('../../index');
+
 const {
   handleRegistrations,
   handleEvents,
