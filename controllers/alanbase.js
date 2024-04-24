@@ -10,7 +10,10 @@ const buildErrorInfo = (errorData, initialData) => {
 
 const postGoals = async goals => {
   try {
-    console.log('postGoals', goals);
+    console.log(
+      'postGoals',
+      goals.map(({ click_id, datetime }) => ({ click_id, datetime })),
+    );
     await alanbaseApi.post(
       `/goals/${process.env.ALANBASE_API_PATH_KEY}`,
       goals,
@@ -27,7 +30,14 @@ const postGoals = async goals => {
 
 const postEvents = async events => {
   try {
-    console.log('postEvents', events);
+    console.log(
+      'postEvents',
+      events.map(({ click_id, datetime, event }) => ({
+        click_id,
+        datetime,
+        event,
+      })),
+    );
     await alanbaseApi.post(
       `/events/${process.env.ALANBASE_API_PATH_KEY}`,
       events,
