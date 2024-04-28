@@ -21,11 +21,13 @@ const fetchPlayers = async () => {
 };
 
 const fetchEvents = async () => {
-  const currentDate = dayjs().utc();
-  const dateFrom = currentDate.subtract(
-    Number(process.env.FETCH_INTERVAL_MINUTES),
-    'minute',
-  );
+  const fetchInterval = Number(process.env.FETCH_INTERVAL_MINUTES);
+  // Сдвиг фетча депозитов, чтобы депозиты
+  // не приходили в Аланбейз раньше регистраций
+  const currentDate = dayjs()
+    .utc()
+    .subtract(fetchInterval + 1, 'minute');
+  const dateFrom = currentDate.subtract(fetchInterval, 'minute');
 
   const { data } = await turboApi.get(
     `/events?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
@@ -41,11 +43,11 @@ const fetchEvents = async () => {
 };
 
 const fetchBets = async () => {
-  const currentDate = dayjs().utc();
-  const dateFrom = currentDate.subtract(
-    Number(process.env.FETCH_INTERVAL_MINUTES),
-    'minute',
-  );
+  const fetchInterval = Number(process.env.FETCH_INTERVAL_MINUTES);
+  const currentDate = dayjs()
+    .utc()
+    .subtract(fetchInterval + 1, 'minute');
+  const dateFrom = currentDate.subtract(fetchInterval, 'minute');
 
   const { data } = await turboApi.get(
     `/bets?date_from=${toFetchFormat(dateFrom)}&date_to=${toFetchFormat(
