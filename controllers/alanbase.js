@@ -31,12 +31,11 @@ const postEvents = async events => {
   try {
     console.log(
       'postEvents',
-      events,
-      // events.map(({ click_id, datetime, event }) => ({
-      //   click_id,
-      //   datetime,
-      //   event,
-      // })),
+      events.map(({ click_id, datetime, event }) => ({
+        click_id,
+        datetime,
+        event,
+      })),
     );
     await alanbaseApi.post(
       `/events/${process.env.ALANBASE_API_PATH_KEY}`,
