@@ -6,10 +6,6 @@ const { EVENTS } = require('../const/events');
 const handleRegistrations = async () => {
   try {
     const players = await turboController.fetchPlayers();
-    // const promises = players.map(async player => await createPlayer(player));
-    // const createdPlayers = (await Promise.all(promises)).filter(player =>
-    //   Boolean(player),
-    // );
 
     if (players.length) {
       await alanbaseController.postGoals(players);
