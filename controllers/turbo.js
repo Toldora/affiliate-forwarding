@@ -17,7 +17,11 @@ const fetchPlayers = async () => {
     )}`,
   );
   const players = data?.data ?? data;
-  return players;
+  const playersWithoutEmptyFields = players.map(player => {
+    const { custom2, ...rest } = player;
+    return custom2 === null ? rest : player;
+  });
+  return playersWithoutEmptyFields;
 };
 
 const fetchEvents = async () => {
